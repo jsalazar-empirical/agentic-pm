@@ -1,0 +1,14 @@
+{
+  "name": "easyfeedback",
+  "version": "1.0.0",
+  "description": "Turn an interview transcript and notes into template-conformant feedback using Claude.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0"
+  }
+}
