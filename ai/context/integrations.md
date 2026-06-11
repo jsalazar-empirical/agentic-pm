@@ -72,11 +72,11 @@ The independent PR Reviewer (`/sdd-pr-review`) posts a **formal GitHub approval*
 reviewer must act as a **separate identity from the author** — a dedicated bot account or a
 GitHub App. Setup (one-time):
 
-**Configured reviewer:** the bot account **`empirical-pr-bot`**
-(`empirical-pr-bot@goempirical.com`). It must be a collaborator on `agentic-pm` with at
-least **write** (review) permission. Setup:
+**Configured reviewer:** the bot account **`empirical-pr-bot-sudo`** (GitHub login;
+email `empirical-pr-bot@goempirical.com`). It is a collaborator on `agentic-pm` with
+**write** (review) permission. Setup:
 
-1. Create the reviewer identity (done — `empirical-pr-bot`):
+1. Create the reviewer identity (done — `empirical-pr-bot-sudo`):
    - **Bot account** (in use): a separate GitHub account added to the repo as a collaborator
      with at least **write** (review) permission. Generate a PAT for it (scope: `repo`).
    - **or GitHub App**: create + install an App on the repo with pull-request read/write,
