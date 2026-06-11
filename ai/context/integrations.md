@@ -65,6 +65,31 @@ Once it exists, the Tester/Reviewer rows pick it up automatically.
 - Connection: GitHub CLI (`gh`). Each person authenticates with their own
   `gh auth login`. No tokens in the repo.
 
+### Review identity (PR Reviewer bot)
+
+The independent PR Reviewer (`/sdd-pr-review`) posts a **formal GitHub approval**, and
+`/sdd-merge` requires `reviewDecision == APPROVED`. GitHub **blocks self-approval**, so the
+reviewer must act as a **separate identity from the author** — a dedicated bot account or a
+GitHub App. Setup (one-time):
+
+**Configured reviewer:** the bot account **`empirical-pr-bot`**
+(`empirical-pr-bot@goempirical.com`). It must be a collaborator on `agentic-pm` with at
+least **write** (review) permission. Setup:
+
+1. Create the reviewer identity (done — `empirical-pr-bot`):
+   - **Bot account** (in use): a separate GitHub account added to the repo as a collaborator
+     with at least **write** (review) permission. Generate a PAT for it (scope: `repo`).
+   - **or GitHub App**: create + install an App on the repo with pull-request read/write,
+     and use an installation token.
+2. Store the token **out of the repo** as an env var: `PR_REVIEWER_GH_TOKEN` (e.g. in the
+   gitignored `.env`, or your shell profile). Never commit it.
+3. `/sdd-pr-review` posts the approval as the bot by setting `GH_TOKEN=$PR_REVIEWER_GH_TOKEN`
+   for the `gh pr review --approve` call only; everything else uses the human's `gh`.
+
+If `PR_REVIEWER_GH_TOKEN` is **not** set, the reviewer falls back to a comment-review +
+visibility comment and warns that a formal approval isn't possible — and `/sdd-merge` will
+correctly refuse to merge (no `APPROVED`). Until the bot exists, a human merges in GitHub.
+
 ---
 
 ## Linkage (the trail)

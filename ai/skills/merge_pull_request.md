@@ -22,9 +22,12 @@ Read `ai/context/integrations.md` for the repo and merge convention. GitHub via 
 
 ## Merge gate (all must hold — never merge otherwise)
 
-1. **Approved:** `gh pr view <pr> --json reviewDecision` is `APPROVED` (the independent PR
-   Reviewer, or a human review). If it's `REVIEW_REQUIRED` / `CHANGES_REQUESTED`, stop and
-   tell the human to run `/sdd-pr-review` (or address the requested changes) first.
+1. **Approved:** `gh pr view <pr> --json reviewDecision` is `APPROVED` — a formal GitHub
+   approval from a **non-author** (the review-bot identity, or another teammate; GitHub
+   blocks self-approval). If it's `REVIEW_REQUIRED` / `CHANGES_REQUESTED` / empty, stop and
+   tell the human to run `/sdd-pr-review` (or address the requested changes) first. If the
+   review-bot isn't configured yet, there can be no `APPROVED` on a self-authored PR — say
+   so and stop; the human must merge in GitHub or set up the bot (see `ai/context/integrations.md`).
 2. **CI green:** `gh pr checks <pr>` shows all checks passing. If checks are still running,
    wait or report; if failing, stop. **No CI configured** (no checks at all) is treated as
    **non-blocking** — there's nothing to wait on — but say so explicitly in the report and

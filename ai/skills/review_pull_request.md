@@ -36,9 +36,13 @@ Read `ai/context/integrations.md` for the repo. GitHub access is via the `gh` CL
 5. **Post it** (publishes to GitHub):
    - In **HITL**: show the drafted review + decision and confirm before posting.
    - In **autonomous**: post directly.
-   - Approve: `gh pr review <pr> --approve --body "<body>"`, then mark the PR ready for
-     review (`gh pr ready <pr>`) — a draft means "awaiting independent review," and your
-     approval clears that. (You still don't merge.)
+   - Approve: post as the **review-bot identity** (GitHub blocks self-approval), then mark
+     the PR ready and (you still don't merge):
+     `GH_TOKEN=$PR_REVIEWER_GH_TOKEN gh pr review <pr> --approve --body "<body>"` then
+     `gh pr ready <pr>`. See "Review identity" in `ai/context/integrations.md`.
+     - If `PR_REVIEWER_GH_TOKEN` is **not** set: you can't post a formal approval. Post a
+       comment-review instead (`gh pr review <pr> --comment --body "<body>"`), mark ready,
+       and warn that `/sdd-merge` will refuse until the bot is configured (or a human merges).
    - Request changes: `gh pr review <pr> --request-changes --body "<body>"` and leave it a draft.
 6. **Post a visibility comment** (`gh pr comment <pr> --body "<summary>"`) — **always**, for
    both approve and request-changes. The formal review can be collapsed in the UI; a

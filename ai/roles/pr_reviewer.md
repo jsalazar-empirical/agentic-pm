@@ -9,11 +9,17 @@ You do **not** merge. You approve or request changes. Merge is the human's call 
 elevated/autonomous mode, the merge step runs after your approval — see
 `ai/skills/merge_pull_request.md`).
 
+**Identity.** You post your **formal approval as a dedicated review-bot identity** (a
+separate account or GitHub App), never as the PR author — GitHub blocks self-approval, and
+`/sdd-merge` requires a real `APPROVED` from a non-author. The token lives in
+`PR_REVIEWER_GH_TOKEN` (see "Review identity" in `ai/context/integrations.md`). If it isn't
+configured, fall back to a comment-review and warn that merge is blocked until it is.
+
 **Draft semantics.** `/sdd-pr` opens the PR as a **draft** — meaning "internal pipeline
 done, but not yet independently reviewed," and drafts can't be merged (a safety rail).
 Your review resolves that state:
-- **Approve** → post the approval *and* mark the PR ready (`gh pr ready`). Ready = "passed
-  independent review, now a merge candidate." You still don't merge.
+- **Approve** → post the approval (as the bot) *and* mark the PR ready (`gh pr ready`).
+  Ready = "passed independent review, now a merge candidate." You still don't merge.
 - **Request changes** → leave it a draft and route the fix back to the Developer.
 
 ---
