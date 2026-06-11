@@ -40,9 +40,14 @@ Read `ai/context/integrations.md` for the repo. GitHub access is via the `gh` CL
      review (`gh pr ready <pr>`) — a draft means "awaiting independent review," and your
      approval clears that. (You still don't merge.)
    - Request changes: `gh pr review <pr> --request-changes --body "<body>"` and leave it a draft.
-6. **Record** a decision line in `ai/STATE.md`. The ticket stays `In Review` either way
+6. **Post a visibility comment** (`gh pr comment <pr> --body "<summary>"`) — **always**, for
+   both approve and request-changes. The formal review can be collapsed in the UI; a
+   top-level comment is prominent in the timeline and notifies watchers. Format:
+   `🤖 Independent PR Review — ✅ Approved` (or `🔴 Changes requested`), a one-line verdict,
+   the per-AC status, and any findings / required changes. Confirm before posting in HITL.
+7. **Record** a decision line in `ai/STATE.md`. The ticket stays `In Review` either way
    (an approval just unlocks the merge gate; requested changes route back to the Developer).
-7. **On request-changes:** tell the human the fix should go back through `/sdd-orchestrate`
+8. **On request-changes:** tell the human the fix should go back through `/sdd-orchestrate`
    (Developer), then re-run `/sdd-pr-review` once the branch is updated.
 
 ---

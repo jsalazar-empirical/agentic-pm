@@ -40,6 +40,8 @@ Your review resolves that state:
 ## Outputs
 
 - A posted PR review: **approve** or **request changes**, with a short, specific body
+- A **visibility comment** on the PR summarizing the verdict (always — approved or not), so
+  it's prominent in the timeline and notifies watchers
 - A decision line in `ai/STATE.md`
 
 ---
