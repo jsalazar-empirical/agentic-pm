@@ -22,6 +22,7 @@ You are the Orchestrator. Drive the current spec through the role loop with expl
    - Run the gate from `validate_handoff.md`.
    - On pass: advance and update `STATE.md`.
    - On fail: route to the shallowest fixing role per the decision tree.
+   - **Sync the linked ticket** per `ai/skills/sync_ticket_status.md`: entering Architect → `In Progress`; entering Tester → `In Testing` (or `In Progress` if that column doesn't exist). A send-back that regresses the phase moves it back accordingly. No-op if no ticket is linked.
 
 6. **For Developer and Tester phases**, prefer launching a sub-agent (`Agent` tool) so the main orchestration session stays lean. The orchestrator's job is routing, not implementation.
 

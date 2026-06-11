@@ -65,16 +65,25 @@ After any of them, run **`/sdd-orchestrate`** to drive the spec through PM → R
 The optional outer loop wraps the role loop:
 
 ```
-/sdd-ticket  →  Linear ticket          (conversation → well-formed ticket)
+/sdd-ticket  →  Linear ticket          (conversation → well-formed ticket)   [Backlog]
 /sdd-board   →  pick a ticket          (or /sdd-task <id> to load one)
-/sdd-spec-from-ticket <id>  →  spec     (links ticket ↔ spec)
-/sdd-orchestrate            →  DONE      (the existing role loop)
-/sdd-pr                     →  draft PR  (links ticket + spec, requests review)
+/sdd-spec-from-ticket <id>  →  spec     (links ticket ↔ spec)                 [→ Todo]
+/sdd-orchestrate            →  DONE      (the existing role loop)              [→ In Progress / In Testing]
+/sdd-pr                     →  draft PR  (links ticket + spec, requests review)[→ In Review]
+/sdd-pr-review              →  approve / request changes  (independent, own fork; no merge)
+/sdd-merge                  →  merge      (human default; approved + CI green) [→ In Staging]
 ```
+
+The ticket's column tracks the work automatically at each step (see the bracketed status,
+and `ai/skills/sync_ticket_status.md`). The internal Reviewer is a pre-PR gate; `/sdd-pr-review`
+is an **independent** review of the opened PR's diff before merge. Merge is the human's by
+default — `/sdd-merge` only merges when the PR is approved + CI is green. `Done` waits for a
+later production deploy.
 
 Coordinates (which Linear project, which repo, branch/PR conventions) live in
 `ai/context/integrations.md`. Connections are per-person: Linear via `.mcp.json` + `/mcp`,
-GitHub via `gh`. Writes to Linear and opening a PR are always human-confirmed.
+GitHub via `gh`. Writes to Linear content and opening/merging a PR are human-confirmed;
+automatic ticket **status** moves are pre-authorized as part of the flow.
 
 ---
 
