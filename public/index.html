@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EasyFeedback</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1>EasyFeedback</h1>
+        <p class="app__subtitle">
+          Turn your interview transcript and notes into template-conformant feedback.
+        </p>
+      </header>
+
+      <section class="card">
+        <div class="field">
+          <label for="template">Template</label>
+          <select id="template" name="template"></select>
+        </div>
+
+        <div class="field">
+          <label for="transcript">Interview transcript</label>
+          <textarea
+            id="transcript"
+            name="transcript"
+            rows="10"
+            placeholder="Paste the full interview transcript here…"
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes <span class="field__hint">(a few lines)</span></label>
+          <textarea
+            id="notes"
+            name="notes"
+            rows="4"
+            placeholder="Your quick notes — strengths, concerns, anything to remember…"
+          ></textarea>
+        </div>
+
+        <button id="generate" class="btn btn--primary" type="button">Generate feedback</button>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="result" class="card result" hidden>
+        <div class="result__bar">
+          <h2>Feedback</h2>
+          <button id="copy" class="btn btn--ghost" type="button">Copy</button>
+        </div>
+        <pre id="output" class="output"></pre>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

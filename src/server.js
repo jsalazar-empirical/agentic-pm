@@ -1,0 +1,127 @@
+import { createServer } from "node:http";
+import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { dirname, join, normalize } from "node:path";
+
+import { loadTemplates, loadTemplate } from "./templates.js";
+import { callClaude } from "./generate.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const PUBLIC_DIR = join(__dirname, "..", "public");
+
+const PORT = process.env.PORT || 3000;
+const HOST = "0.0.0.0";
+
+const MIME = {
+  ".html": "text/html; charset=utf-8",
+  ".js": "text/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".ico": "image/x-icon",
+};
+
+function sendJson(res, status, body) {
+  const payload = JSON.stringify(body);
+  res.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
+  res.end(payload);
+}
+
+function readBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    req.on("data", (chunk) => {
+      size += chunk.length;
+      // Guard against unbounded bodies (~5MB cap).
+      if (size > 5 * 1024 * 1024) {
+        reject(new Error("Request body too large"));
+        req.destroy();
+        return;
+      }
+      chunks.push(chunk);
+    });
+    req.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+    req.on("error", reject);
+  });
+}
+
+async function handleGenerate(req, res) {
+  let body;
+  try {
+    const raw = await readBody(req);
+    body = JSON.parse(raw);
+  } catch {
+    return sendJson(res, 400, { error: "Invalid JSON request body." });
+  }
+
+  const { templateId, transcript, notes } = body ?? {};
+
+  if (!templateId || typeof templateId !== "string") {
+    return sendJson(res, 400, { error: "Missing or invalid 'templateId'." });
+  }
+  if (!transcript || typeof transcript !== "string" || !transcript.trim()) {
+    return sendJson(res, 400, { error: "Missing or empty 'transcript'." });
+  }
+
+  const template = await loadTemplate(templateId);
+  if (template === null) {
+    return sendJson(res, 400, { error: `Unknown template: '${templateId}'.` });
+  }
+
+  try {
+    const feedback = await callClaude(template, transcript, notes);
+    return sendJson(res, 200, { feedback });
+  } catch (err) {
+    const message = err?.message || "Feedback generation failed.";
+    return sendJson(res, 502, { error: `Anthropic request failed: ${message}` });
+  }
+}
+
+async function serveStatic(req, res) {
+  // Map "/" to index.html; resolve the path safely inside PUBLIC_DIR.
+  const urlPath = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
+  const relPath = urlPath === "/" ? "index.html" : urlPath.replace(/^\/+/, "");
+  const filePath = normalize(join(PUBLIC_DIR, relPath));
+
+  if (!filePath.startsWith(PUBLIC_DIR)) {
+    res.writeHead(403);
+    return res.end("Forbidden");
+  }
+
+  try {
+    const file = await readFile(filePath);
+    const ext = filePath.slice(filePath.lastIndexOf("."));
+    res.writeHead(200, { "Content-Type": MIME[ext] || "application/octet-stream" });
+    res.end(file);
+  } catch {
+    res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("Not found");
+  }
+}
+
+const server = createServer(async (req, res) => {
+  const { pathname } = new URL(req.url, "http://localhost");
+
+  if (req.method === "GET" && pathname === "/api/templates") {
+    try {
+      const templates = await loadTemplates();
+      return sendJson(res, 200, { templates });
+    } catch {
+      return sendJson(res, 500, { error: "Could not load templates." });
+    }
+  }
+
+  if (req.method === "POST" && pathname === "/api/generate") {
+    return handleGenerate(req, res);
+  }
+
+  if (req.method === "GET") {
+    return serveStatic(req, res);
+  }
+
+  res.writeHead(405, { "Content-Type": "text/plain; charset=utf-8" });
+  res.end("Method not allowed");
+});
+
+server.listen(PORT, HOST, () => {
+  console.log(`EasyFeedback listening on http://${HOST}:${PORT}`);
+});

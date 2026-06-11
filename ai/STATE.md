@@ -12,7 +12,7 @@ current_ticket:  EMP-68
 current_role:    reviewer
 current_phase:   done
 mode:            hitl
-current_pr:      none
+current_pr:      https://github.com/jsalazar-empirical/agentic-pm/pull/2
 started_at:      2026-06-10
 ```
 
@@ -28,6 +28,8 @@ Format: `YYYY-MM-DD | role | decision`
 - 2026-06-10 | developer | Implemented server/generate/templates + vanilla UI + 16 tests (all pass); Developer gate passed. AC3/AC6 need live verification with a real API key.
 - 2026-06-10 | tester | Offline 16/16 + live generation PASS (~21s, ~$0.02-0.05/gen, template-conformant); all 6 ACs PASS; Tester gate passed.
 - 2026-06-10 | reviewer | Reviewer gate passed; all 6 ACs confirmed; 1 INFO finding (non-exploitable path-prefix); spec 001 DONE. Ready for /sdd-pr.
+- 2026-06-11 | shipping | Seeded empty repo (baseline->main); pushed EMP-68 app branch; opened draft PR #1.
+- 2026-06-11 | shipping | Renamed branch to feature/EMP-68-core-feedback-generation (new convention); PR #1 auto-closed, reopened as PR #2.
 
 ---
 
