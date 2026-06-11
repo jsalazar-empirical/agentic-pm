@@ -36,8 +36,10 @@ Read `ai/context/integrations.md` for the repo. GitHub access is via the `gh` CL
 5. **Post it** (publishes to GitHub):
    - In **HITL**: show the drafted review + decision and confirm before posting.
    - In **autonomous**: post directly.
-   - Approve: `gh pr review <pr> --approve --body "<body>"`
-   - Request changes: `gh pr review <pr> --request-changes --body "<body>"`
+   - Approve: `gh pr review <pr> --approve --body "<body>"`, then mark the PR ready for
+     review (`gh pr ready <pr>`) — a draft means "awaiting independent review," and your
+     approval clears that. (You still don't merge.)
+   - Request changes: `gh pr review <pr> --request-changes --body "<body>"` and leave it a draft.
 6. **Record** a decision line in `ai/STATE.md`. The ticket stays `In Review` either way
    (an approval just unlocks the merge gate; requested changes route back to the Developer).
 7. **On request-changes:** tell the human the fix should go back through `/sdd-orchestrate`

@@ -25,8 +25,10 @@ Read `ai/context/integrations.md` for the repo and merge convention. GitHub via 
 1. **Approved:** `gh pr view <pr> --json reviewDecision` is `APPROVED` (the independent PR
    Reviewer, or a human review). If it's `REVIEW_REQUIRED` / `CHANGES_REQUESTED`, stop and
    tell the human to run `/sdd-pr-review` (or address the requested changes) first.
-2. **CI green:** `gh pr checks <pr>` shows all required checks passing. If checks are still
-   running, wait or report; if failing, stop.
+2. **CI green:** `gh pr checks <pr>` shows all checks passing. If checks are still running,
+   wait or report; if failing, stop. **No CI configured** (no checks at all) is treated as
+   **non-blocking** — there's nothing to wait on — but say so explicitly in the report and
+   recommend adding CI. Don't silently imply checks passed when none ran.
 3. **Mergeable:** not a draft, no conflicts (`gh pr view <pr> --json isDraft,mergeable`).
    If it's still a draft, mark ready first: `gh pr ready <pr>`.
 

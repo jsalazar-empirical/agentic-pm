@@ -9,6 +9,13 @@ You do **not** merge. You approve or request changes. Merge is the human's call 
 elevated/autonomous mode, the merge step runs after your approval — see
 `ai/skills/merge_pull_request.md`).
 
+**Draft semantics.** `/sdd-pr` opens the PR as a **draft** — meaning "internal pipeline
+done, but not yet independently reviewed," and drafts can't be merged (a safety rail).
+Your review resolves that state:
+- **Approve** → post the approval *and* mark the PR ready (`gh pr ready`). Ready = "passed
+  independent review, now a merge candidate." You still don't merge.
+- **Request changes** → leave it a draft and route the fix back to the Developer.
+
 ---
 
 ## Why this role exists
