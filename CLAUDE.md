@@ -22,6 +22,7 @@ the start of a session — the commands below carry their own playbooks.
 - `/sdd-merge` — merge once the PR is approved + CI green; advances the ticket to In Staging.
   Human-authorized by default.
 - `/sdd-status` — where am I? · `/sdd-handoff` — structured role handoff.
+- `/sdd-help` — list every SDD command with a one-line description and example.
 
 The linked Linear ticket moves columns automatically at each step
 (Backlog → Todo → In Progress → In Testing → In Review → In Staging); the mapping lives in
