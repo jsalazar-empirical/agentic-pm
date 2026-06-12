@@ -24,8 +24,10 @@ conventions, and reviewers.
 
 1. Read `ai/STATE.md` for `current_spec` and `current_ticket`. Read the spec's `spec.md`
    for the summary and acceptance criteria.
-2. Create/confirm the feature branch. Prefer the Linear `branchName` for the ticket (so
-   Linear auto-links the PR); else `<TICKET-ID>-<short-slug>`.
+2. Create/confirm the branch using the convention in `ai/context/integrations.md`:
+   `<type>/<TICKET-ID>-<short-slug>` (type = feature|fix|hotfix|chore|docs|refactor).
+   Keep the `<TICKET-ID>` in the name so Linear auto-links the PR. Don't use the bare
+   author-name prefix Linear suggests by default.
 3. Run the project's tests and linter. **Don't open a PR over red tests.**
 4. Push the branch.
 5. **Confirm with the human before opening the PR** — opening a PR publishes content.
@@ -37,6 +39,8 @@ conventions, and reviewers.
 7. Request review (`gh pr edit --add-reviewer …` or rely on CODEOWNERS).
 8. Update `ai/STATE.md`: set `current_pr` to the PR URL and append a decision line.
    Report the PR URL to the human.
+9. Move the linked ticket to `In Review` per `ai/skills/sync_ticket_status.md` (no-op if
+   no ticket is linked). When the PR is later merged, move it to `In Staging`.
 
 ---
 

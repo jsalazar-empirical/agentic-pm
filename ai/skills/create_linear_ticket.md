@@ -29,7 +29,8 @@ instructions at the start of a conversation — running the command loads it.
    interrogate.
 4. Draft the ticket in the standard below and show it to the human.
 5. On explicit confirmation, create the issue in the `agentic-pm` project via the Linear
-   MCP, set the default status, and return the new identifier + URL.
+   MCP, set the default status (`Backlog` — the start of the status workflow in
+   `ai/skills/sync_ticket_status.md`), and return the new identifier + URL.
 
 ---
 

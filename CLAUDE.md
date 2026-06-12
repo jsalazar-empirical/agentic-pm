@@ -8,7 +8,7 @@ the start of a session — the commands below carry their own playbooks.
 
 `ai/STATE.md` is the single source of truth for where we are. Read it first when resuming.
 
-## The flow — Conversation → Ticket → Spec → Implementation → PR
+## The flow — Conversation → Ticket → Spec → Implementation → PR → Merge
 
 - `/sdd-ticket` — turn an idea into a Linear ticket in `agentic-pm`. The ticket-writing
   standard lives in `ai/skills/create_linear_ticket.md`, so nothing needs pasting.
@@ -17,7 +17,16 @@ the start of a session — the commands below carry their own playbooks.
   Or `/sdd-spec` / `/sdd-spec-socratic` for specs without a ticket.
 - `/sdd-orchestrate` — drive the spec through PM → Architect → Developer → Tester → Reviewer.
 - `/sdd-pr` — open a GitHub PR for the finished spec and request review.
+- `/sdd-pr-review` — independent review of the opened PR's diff (own fork); approve or
+  request changes. Does not merge.
+- `/sdd-merge` — merge once the PR is approved + CI green; advances the ticket to In Staging.
+  Human-authorized by default.
 - `/sdd-status` — where am I? · `/sdd-handoff` — structured role handoff.
+- `/sdd-help` — list every SDD command with a one-line description and example.
+
+The linked Linear ticket moves columns automatically at each step
+(Backlog → Todo → In Progress → In Testing → In Review → In Staging); the mapping lives in
+`ai/skills/sync_ticket_status.md`.
 
 ## Integrations
 
@@ -28,4 +37,6 @@ the project `.mcp.json` (run `/mcp` once to authorize). GitHub uses the `gh` CLI
 ## Principles
 
 Clarity over cleverness. Small increments. Explicit gates and handoffs. Human-in-the-loop
-by default. **Never write to Linear or open a PR without confirmation.**
+by default. **Never write Linear content (create/edit issues, post comments) or open/merge
+a PR without confirmation.** Automatic ticket **status** moves are pre-authorized as part of
+the flow (see `ai/skills/sync_ticket_status.md`).

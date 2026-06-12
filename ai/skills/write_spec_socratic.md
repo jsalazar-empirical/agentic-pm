@@ -141,4 +141,7 @@ Update `ai/STATE.md`:
 - `current_phase`: `pm`
 - log decision: `"Spec drafted via Socratic interview; handoff to PM for criteria refinement."`
 
+If a Linear ticket is linked (`current_ticket` is set), move it to `Todo` per
+`ai/skills/sync_ticket_status.md` (handoff to PM).
+
 Then invoke the PM role (`ai/roles/pm.md`) — or, in HITL mode, pause and ask the human to confirm before handing off.

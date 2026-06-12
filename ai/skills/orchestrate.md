@@ -46,6 +46,12 @@ For each phase below, the orchestrator:
 5. **In HITL mode:** pauses for human approval at each gate.
 6. **In autonomous mode:** logs the decision to `STATE.md` and proceeds, unless a send-back is required.
 7. **Updates** `STATE.md` and advances to the next phase (or routes the send-back).
+8. **Syncs the linked Linear ticket** to the phase's status per `ai/skills/sync_ticket_status.md` (no-op if `current_ticket` is `none`).
+
+Ticket status at each phase (see `ai/skills/sync_ticket_status.md` for the full mapping and rules):
+- **PM** → `Todo` (usually already set when the spec was handed off from the ticket)
+- **Architect**, **Developer** → `In Progress`
+- **Tester**, **Reviewer** → `In Testing` if the column exists, else `In Progress`
 
 ### Phase 1 — PM
 

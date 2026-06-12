@@ -50,8 +50,9 @@ Pick the one that matches your situation:
 - **Clear ask** → `/sdd-spec` (direct authoring)
 - **A Linear ticket** → `/sdd-spec-from-ticket <id>` (pulls the ticket, links it to the spec)
 
-Then in all cases: `/sdd-orchestrate` to drive the spec through the role loop, and
-`/sdd-pr` to open the pull request once the Reviewer signs off.
+Then in all cases: `/sdd-orchestrate` to drive the spec through the role loop, `/sdd-pr`
+to open the pull request once the Reviewer signs off, `/sdd-pr-review` for an independent
+review of the opened PR, and `/sdd-merge` to merge once it's approved + CI green.
 
 `/sdd-status` shows where you are. `/sdd-handoff` produces a structured handoff contract.
 
