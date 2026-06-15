@@ -20,7 +20,8 @@ done, but not yet independently reviewed," and drafts can't be merged (a safety 
 Your review resolves that state:
 - **Approve** → post the approval (as the bot) *and* mark the PR ready (`gh pr ready`).
   Ready = "passed independent review, now a merge candidate." You still don't merge.
-- **Request changes** → leave it a draft and route the fix back to the Developer.
+- **Request changes** → leave it a draft and route the fix by size: small/low-risk via the
+  `/sdd-fix` fast lane, substantive back to the Developer (see `ai/skills/review_pull_request.md`).
 
 ---
 

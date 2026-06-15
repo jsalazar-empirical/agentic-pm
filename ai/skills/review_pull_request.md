@@ -53,7 +53,7 @@ Read `ai/context/integrations.md` for the repo. GitHub access is via the `gh` CL
    summarizing the verdict (`PR review: ✅ approved` / `🔴 changes requested`) — auto,
    no-op if no ticket. This is on the Linear ticket, separate from the PR's GitHub comment.
 8. **Record** a decision line in `ai/STATE.md`. The ticket stays `In Review` either way
-   (an approval just unlocks the merge gate; requested changes route back to the Developer).
+   (an approval just unlocks the merge gate; requested changes are routed by size in step 9).
 9. **On request-changes — triage the fix into one of two lanes (HITL and autonomous):**
    First **classify** the findings:
    - **Small / low-risk** — docs/comments/naming, a localized one-liner, no behavior change,
