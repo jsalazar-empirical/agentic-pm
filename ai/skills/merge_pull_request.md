@@ -45,7 +45,8 @@ If any check fails, **do not merge** — report which gate failed and stop.
 2. Merge with the repo's convention (default squash unless integrations says otherwise):
    `gh pr merge <pr> --squash --delete-branch`.
 3. **Move the ticket to `In Staging`** per `ai/skills/sync_ticket_status.md` (no-op if no
-   ticket is linked).
+   ticket is linked), and post a "Merged → In Staging" progress comment per
+   `ai/skills/log_ticket_progress.md` (auto).
 4. Update `ai/STATE.md`: append a decision line (`PR #<n> merged → In Staging`). Leave
    `current_pr` as the (now-merged) URL for traceability.
 5. Report: merged commit, the ticket's new status, and that `Done` remains for a later

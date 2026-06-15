@@ -15,7 +15,7 @@ command is the authorization. Only merge if the gate below holds.
    - Not a draft / no conflicts (mark ready with `gh pr ready` if needed).
    If any fails, **do not merge** — report which gate failed and stop.
 4. Merge with the repo convention (default `--squash --delete-branch`).
-5. **Move the ticket to `In Staging`** per `ai/skills/sync_ticket_status.md`.
+5. **Move the ticket to `In Staging`** per `ai/skills/sync_ticket_status.md`, and **post a "Merged → In Staging" progress comment** per `ai/skills/log_ticket_progress.md` (auto, no-op if no ticket).
 6. Update `ai/STATE.md` with a decision line (`PR #<n> merged → In Staging`).
 7. Report the merge + the ticket's new status. Note that `Done` waits for a production deploy.
 

@@ -13,7 +13,8 @@ actual opened PR against `main` and approve or request changes. You do **not** m
 4. Decide approve vs. request-changes against the PR Reviewer gate. Draft a short, specific review body.
 5. **Post the review.** Approvals go in as the **review-bot identity** (`GH_TOKEN=$PR_REVIEWER_GH_TOKEN`) since GitHub blocks self-approval — then `gh pr ready`. Request-changes via `gh pr review --request-changes`. If the bot token isn't set, fall back to a comment-review and warn. In HITL, show the draft and confirm before posting; in autonomous, post directly. See "Review identity" in `ai/context/integrations.md`.
 6. **Post a visibility comment** (`gh pr comment`) summarizing the verdict — always, approved or not — so it's prominent and notifies watchers.
-7. Update `ai/STATE.md` with a decision line. On request-changes, route the fix back through `/sdd-orchestrate` (Developer), then re-run `/sdd-pr-review`.
+7. **Post a progress comment on the linked ticket** per `ai/skills/log_ticket_progress.md` summarizing the verdict (`PR review: ✅ approved` / `🔴 changes requested`) — auto, no-op if no ticket. (This is on the Linear ticket; separate from the PR's GitHub comment.)
+8. Update `ai/STATE.md` with a decision line. On request-changes, route the fix back through `/sdd-orchestrate` (Developer), then re-run `/sdd-pr-review`.
 
 ## Hard rules
 

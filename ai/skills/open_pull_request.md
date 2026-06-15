@@ -40,7 +40,9 @@ conventions, and reviewers.
 8. Update `ai/STATE.md`: set `current_pr` to the PR URL and append a decision line.
    Report the PR URL to the human.
 9. Move the linked ticket to `In Review` per `ai/skills/sync_ticket_status.md` (no-op if
-   no ticket is linked). When the PR is later merged, move it to `In Staging`.
+   no ticket is linked), and post a short "PR opened → In Review" progress comment per
+   `ai/skills/log_ticket_progress.md` (auto). When the PR is later merged, move it to
+   `In Staging`.
 
 ---
 

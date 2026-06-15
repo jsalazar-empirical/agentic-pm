@@ -70,3 +70,5 @@ principles. A column move is not content.
 - **Done:** intentionally not wired yet. Per the team's workflow, *Done* means the change
   is in production (a separate PR + deploy), so it's handled later, not at spec completion.
 - Keep this skill in lockstep with `ai/context/integrations.md` → "Status workflow".
+- **Companion:** `ai/skills/log_ticket_progress.md` posts a short progress comment at these
+  same transition points (the audit trail). Fire both together at each transition.
