@@ -33,6 +33,7 @@ substantive ones route back to the Developer via `/sdd-orchestrate`.
 | `/sdd-spec` | Draft a spec directly from a clear ask | `/sdd-spec` |
 | `/sdd-spec-socratic` | Draft a spec via a Socratic interview (vague ask) | `/sdd-spec-socratic` |
 | `/sdd-status` | Show where you are — active spec, role, phase, mode | `/sdd-status` |
+| `/sdd-loop` | Autonomously drain the board ticket-by-ticket; human resolves blockers + merges | `/sdd-loop` |
 | `/sdd-fix <desc>` | Fast-lane a small PR fix on the branch + re-review (not for big changes) | `/sdd-fix tighten error copy` |
 | `/sdd-handoff` | Produce a role-to-role handoff contract | `/sdd-handoff` |
 | `/sdd-help` | Show this command list | `/sdd-help` |
