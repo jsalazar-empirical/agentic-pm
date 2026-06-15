@@ -15,7 +15,7 @@ actual opened PR against `main` and approve or request changes. You do **not** m
 6. **Post a visibility comment** (`gh pr comment`) summarizing the verdict — always, approved or not (auto).
 7. **Post a progress comment on the linked ticket** per `ai/skills/log_ticket_progress.md` (`PR review: ✅ approved` / `🔴 changes requested`) — auto, no-op if no ticket.
 8. Update `ai/STATE.md` with a decision line.
-9. **On request-changes, auto-loop the fix** (per `ai/skills/review_pull_request.md`): record the send-back, spawn the Developer to fix on the same branch + push, then re-run the review — up to **2 rounds**, then force HITL. The merge itself stays the human's call (`/sdd-merge`).
+9. **On request-changes, triage + auto-loop the fix** (per `ai/skills/review_pull_request.md`): **small/low-risk** → `/sdd-fix` (patch on the branch → re-review, no orchestrate); **substantive / unsure** → back to the Developer (rewind `STATE` to dev, run `/sdd-orchestrate` → re-verify → re-review). Up to **2 rounds**, then force HITL. Merge stays the human's call (`/sdd-merge`).
 
 ## Hard rules
 

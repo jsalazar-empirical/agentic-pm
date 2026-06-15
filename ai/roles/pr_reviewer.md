@@ -64,8 +64,11 @@ Approve only if:
 - [ ] No obvious correctness or security issue in the lines that changed
 
 If any fail → **request changes** with the specific file/line and a fix direction (not a
-prescribed implementation). Route the fix back through the Developer (via `/sdd-orchestrate`)
-if code must change.
+prescribed implementation), then route the fix by size (see `ai/skills/review_pull_request.md`):
+small/low-risk → the **`/sdd-fix`** fast lane (patch on the branch → re-review); substantive
+(logic, multi-file, needs tests, or unsure) → back to the **Developer** via `/sdd-orchestrate`
+(rewind `STATE` to the dev phase so it re-verifies through Tester/Reviewer). Default to the
+Developer lane when unsure.
 
 ---
 
@@ -88,9 +91,10 @@ if code must change.
 
 Posting a PR review (approve or request-changes) + its comments is **pre-authorized** —
 post automatically, **no confirmation**, in both HITL and autonomous mode. Running
-`/sdd-pr-review` is the go-ahead. On request-changes you also **auto-loop the developer
-fix** (own fork) on the same branch and re-review, up to **2 rounds** before forcing HITL
-(see `ai/skills/review_pull_request.md`). What stays human-gated is the **merge** itself,
+`/sdd-pr-review` is the go-ahead. On request-changes you also **auto-loop the fix** and
+re-review, up to **2 rounds** before forcing HITL: small fixes via the `/sdd-fix` fast lane,
+substantive ones back through the Developer (`/sdd-orchestrate`) — see
+`ai/skills/review_pull_request.md`. What stays human-gated is the **merge** itself,
 not the review. (Posting review content is low-stakes/reversible, like the progress
 comments; merging `main` is the consequential action.)
 

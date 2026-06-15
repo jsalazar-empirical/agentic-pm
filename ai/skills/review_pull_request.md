@@ -54,17 +54,29 @@ Read `ai/context/integrations.md` for the repo. GitHub access is via the `gh` CL
    no-op if no ticket. This is on the Linear ticket, separate from the PR's GitHub comment.
 8. **Record** a decision line in `ai/STATE.md`. The ticket stays `In Review` either way
    (an approval just unlocks the merge gate; requested changes route back to the Developer).
-9. **On request-changes — auto-loop the fix (HITL and autonomous):**
-   1. Record the send-back in `ai/STATE.md` (`reviewer → developer | <reason> | <spec>`).
-   2. **Spawn the Developer** (own fork, per `ai/roles/developer.md`) to address the
-      findings on the **same branch** — give it the review body + the spec/architecture.
-      It fixes, updates tests if needed, and pushes to the existing PR branch (no new PR).
-   3. **Re-run this review** on the updated diff (back to step 1).
-   4. Repeat until the verdict is approve. **Loop cap: 2 auto-rounds.** If a 3rd round would
-      be needed, **stop and force HITL** — surface the outstanding findings to the human and
-      wait. This mirrors the gate loop limit in `ai/orchestration/hitl_policy.md` and
-      prevents reviewer↔developer ping-pong from running away.
-   5. The PR stays a **draft** the whole time (not mergeable) until an approval marks it ready.
+9. **On request-changes — triage the fix into one of two lanes (HITL and autonomous):**
+   First **classify** the findings:
+   - **Small / low-risk** — docs/comments/naming, a localized one-liner, no behavior change,
+     no new or changed tests needed.
+   - **Substantive** — logic/behavior change, touches multiple files, needs new/changed
+     tests, or you're unsure. **When in doubt, treat it as substantive** (the safe lane).
+
+   **Small-fix lane → `/sdd-fix`** (`ai/skills/apply_small_fix.md`):
+   1. Apply the small fix on the **same branch**, push (no new PR). No `/sdd-orchestrate`,
+      no Tester — it's a patch-in-place; `STATE` phase is unchanged.
+   2. **Re-run this review** on the updated diff.
+
+   **Substantive lane → back to the Developer (full verification):**
+   1. Record the send-back in `ai/STATE.md` (`reviewer → developer | <reason> | <spec>`) and
+      **rewind phase**: set `current_role: developer`, `current_phase: dev`.
+   2. Run **`/sdd-orchestrate`** — it resumes at Developer → Tester → Reviewer, so the change
+      is re-verified before it comes back. The Developer works on the **same branch** and pushes.
+   3. When it reaches DONE again, **re-run this review** on the updated diff.
+
+   **Both lanes:** the PR stays a **draft** (not mergeable) until an approval marks it ready.
+   **Loop cap: 2 auto-rounds** of request-changes on the same PR; a 3rd forces HITL — surface
+   the outstanding findings to the human and wait (mirrors the gate loop limit in
+   `ai/orchestration/hitl_policy.md`; prevents reviewer↔fix ping-pong from running away).
 
 ---
 

@@ -41,9 +41,13 @@ Gates where HITL pauses:
 The independent PR review (`/sdd-pr-review`) is **not** a HITL pause point — it
 **auto-posts** its verdict (approve or request-changes) and auto-loops in both modes:
 
-- On **request-changes**, it records a send-back and auto-spawns the Developer to fix on
-  the same branch, then re-reviews — up to **2 rounds**, then forces HITL (same cap as the
-  role-loop gates).
+- On **request-changes**, it triages the fix and auto-loops, then re-reviews — up to
+  **2 rounds**, then forces HITL (same cap as the role-loop gates):
+  - **small / low-risk** (docs, naming, one-liner, no behavior change, no new tests) →
+    the **`/sdd-fix`** fast lane: patch the branch in place → re-review (no `/sdd-orchestrate`,
+    no Tester, `STATE` phase unchanged);
+  - **substantive / unsure** → back to the **Developer**: rewind `STATE` to the dev phase and
+    run `/sdd-orchestrate` so the change re-verifies through Tester → Reviewer before re-PR-review.
 - On **approve**, it marks the PR ready.
 - The one human-gated action here is the **merge** (`/sdd-merge`) — that always requires the
   human (running the command is the authorization), in both modes by default.
