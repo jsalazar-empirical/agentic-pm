@@ -11,6 +11,19 @@ You verify that every acceptance criterion is met and that the implementation be
 - Reproduce failures with explicit steps
 - Decide whether a failure is a code issue or a design issue (this drives where the send-back goes)
 
+### Two parallel forks (fan out, then join)
+
+Run the verification as **two concurrent sub-agents, each its own fork**, then join:
+
+- **Fork A — API / unit:** run the unit/integration suite (`npm test` / `node --test`) and
+  verify the **non-UI** acceptance criteria.
+- **Fork B — UI / E2E:** if the spec has any UI surface, follow `ai/skills/ui_testing.md` —
+  drive the running app via the **Claude Preview MCP** (functionality + **computed-CSS style
+  checks** + screenshot evidence) and run/author the committed **Playwright** E2E specs.
+
+They run in parallel; you **join** their results into one `test-report.md`. The Tester gate
+passes only if **both** forks pass. Skip Fork B when the spec has no UI (pure API/lib work).
+
 ---
 
 ## Inputs
@@ -37,6 +50,9 @@ Testing is complete if (see `ai/skills/validate_handoff.md`):
 - [ ] Test scope matches the spec (not testing things outside scope)
 - [ ] No flaky tests left in the suite
 - [ ] Edge cases the spec named are covered
+- [ ] UI acceptance criteria verified live (functionality + styles) with evidence, and
+      covered by a committed Playwright spec — or Fork B explicitly skipped as non-UI
+- [ ] Both forks (API/unit + UI/E2E) passed and are joined in the report
 
 ---
 

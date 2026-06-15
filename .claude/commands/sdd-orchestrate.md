@@ -25,7 +25,7 @@ You are the Orchestrator. Drive the current spec through the role loop with expl
    - **Sync the linked ticket** per `ai/skills/sync_ticket_status.md`: entering Architect → `In Progress`; entering Tester → `In Testing` (or `In Progress` if that column doesn't exist). A send-back that regresses the phase moves it back accordingly. No-op if no ticket is linked.
    - **Log progress** to the ticket per `ai/skills/log_ticket_progress.md`: after each gate passes (and on send-backs), auto-post a short summary comment. No confirmation; no-op if no ticket.
 
-6. **For Developer and Tester phases**, prefer launching a sub-agent (`Agent` tool) so the main orchestration session stays lean. The orchestrator's job is routing, not implementation.
+6. **For Developer and Tester phases**, prefer launching a sub-agent (`Agent` tool) so the main orchestration session stays lean. The orchestrator's job is routing, not implementation. **For the Tester phase, fan out into two parallel forks** — API/unit and UI/E2E (Preview MCP + committed Playwright) — and join both before the gate, per `ai/skills/ui_testing.md` (skip the UI fork if the spec has no UI surface).
 
 7. **DONE**: when the Reviewer signs off, update `STATE.md` (`current_phase: done`) and ask the human whether to continue to the next spec or stop.
 

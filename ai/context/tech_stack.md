@@ -28,6 +28,21 @@
 
 ---
 
+## Testing
+
+Two tiers (see `ai/skills/ui_testing.md`):
+
+- **Unit / integration:** Node's built-in `node:test` (`npm test`) — fast, no browser, no
+  network (LLM calls stubbed). Runs in CI.
+- **UI / E2E:** **`@playwright/test`** committed specs (`tests/e2e/`) run headless in CI for
+  durable regression; the **Claude Preview MCP** is used for the Tester's live verification
+  (functionality + **computed-CSS style checks** + screenshots) and to author the specs.
+- **CI:** GitHub Actions runs both tiers on every PR — this is the real signal behind the
+  `/sdd-merge` "CI green" gate. Non-deterministic (LLM) flows are **stubbed** in CI; the
+  real-model check is a Tester/MCP or nightly step, never PR-blocking.
+
+---
+
 ## AI Tools
 
 - **LLM:** Claude — default **Sonnet 4.6** (`claude-sonnet-4-6`) for reliable,
