@@ -91,6 +91,10 @@ automatic ticket **status** moves are pre-authorized as part of the flow.
 
 - **HITL (default)** — orchestrator pauses at every gate.
 - **Autonomous** — orchestrator decides at every gate, logs everything, hard-stops at 2 iterations per gate.
+- **Autonomy levels & escalation** — `ai/orchestration/escalation_policy.md` defines L0/L1/L2
+  and exactly what escalates to the human (irreversible actions, ambiguity, repeated failure,
+  security, spec conflicts). At **L2**, `/sdd-loop` drains the board ticket-by-ticket
+  unattended, parking blockers for the human and leaving merges to the human.
 
 See `ai/orchestration/hitl_policy.md`.
 

@@ -23,6 +23,9 @@ the start of a session — the commands below carry their own playbooks.
   Human-authorized by default.
 - `/sdd-status` — where am I? · `/sdd-handoff` — structured role handoff.
 - `/sdd-help` — list every SDD command with a one-line description and example.
+- `/sdd-loop` — high-autonomy: drain the board ticket-by-ticket; the human acts as
+  orchestrator (resolves blockers, merges). Governed by `ai/orchestration/escalation_policy.md`
+  (autonomy levels L0/L1/L2 + what must escalate to a human).
 
 The linked Linear ticket moves columns automatically at each step
 (Backlog → Todo → In Progress → In Testing → In Review → In Staging); the mapping lives in
