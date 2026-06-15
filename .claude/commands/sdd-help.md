@@ -20,6 +20,9 @@ command file and give a short explanation.
 | `/sdd-pr-review <pr>` | Independent review of the PR — approve / request changes | `/sdd-pr-review 3` |
 | `/sdd-merge <pr>` | Merge once approved + CI green → ticket to In Staging | `/sdd-merge 3` |
 
+On request-changes, small fixes auto-take the `/sdd-fix` fast lane (patch + re-review);
+substantive ones route back to the Developer via `/sdd-orchestrate`.
+
 ## Other commands
 
 | Command | What it does | Example |
@@ -30,6 +33,7 @@ command file and give a short explanation.
 | `/sdd-spec` | Draft a spec directly from a clear ask | `/sdd-spec` |
 | `/sdd-spec-socratic` | Draft a spec via a Socratic interview (vague ask) | `/sdd-spec-socratic` |
 | `/sdd-status` | Show where you are — active spec, role, phase, mode | `/sdd-status` |
+| `/sdd-fix <desc>` | Fast-lane a small PR fix on the branch + re-review (not for big changes) | `/sdd-fix tighten error copy` |
 | `/sdd-handoff` | Produce a role-to-role handoff contract | `/sdd-handoff` |
 | `/sdd-help` | Show this command list | `/sdd-help` |
 

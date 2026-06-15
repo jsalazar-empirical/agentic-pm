@@ -33,9 +33,9 @@ Read `ai/context/integrations.md` for the repo. GitHub access is via the `gh` CL
 3. **Decide:** approve, or request changes.
 4. **Draft the review body** — short and specific: a one-line verdict, then bullet findings
    with `file:line` and a fix direction for anything blocking.
-5. **Post it** (publishes to GitHub):
-   - In **HITL**: show the drafted review + decision and confirm before posting.
-   - In **autonomous**: post directly.
+5. **Post it** (publishes to GitHub) — **auto, no confirmation** in both HITL and
+   autonomous mode. Posting a review (approve or request-changes) is pre-authorized, like
+   the progress comment; the human is still the merge gate.
    - Approve: post as the **review-bot identity** (GitHub blocks self-approval), then mark
      the PR ready and (you still don't merge):
      `GH_TOKEN=$PR_REVIEWER_GH_TOKEN gh pr review <pr> --approve --body "<body>"` then
@@ -48,14 +48,35 @@ Read `ai/context/integrations.md` for the repo. GitHub access is via the `gh` CL
    both approve and request-changes. The formal review can be collapsed in the UI; a
    top-level comment is prominent in the timeline and notifies watchers. Format:
    `🤖 Independent PR Review — ✅ Approved` (or `🔴 Changes requested`), a one-line verdict,
-   the per-AC status, and any findings / required changes. Confirm before posting in HITL.
+   the per-AC status, and any findings / required changes. Auto-posted (no confirmation).
 7. **Post a progress comment on the linked ticket** per `ai/skills/log_ticket_progress.md`
    summarizing the verdict (`PR review: ✅ approved` / `🔴 changes requested`) — auto,
    no-op if no ticket. This is on the Linear ticket, separate from the PR's GitHub comment.
 8. **Record** a decision line in `ai/STATE.md`. The ticket stays `In Review` either way
-   (an approval just unlocks the merge gate; requested changes route back to the Developer).
-9. **On request-changes:** tell the human the fix should go back through `/sdd-orchestrate`
-   (Developer), then re-run `/sdd-pr-review` once the branch is updated.
+   (an approval just unlocks the merge gate; requested changes are routed by size in step 9).
+9. **On request-changes — triage the fix into one of two lanes (HITL and autonomous):**
+   First **classify** the findings:
+   - **Small / low-risk** — docs/comments/naming, a localized one-liner, no behavior change,
+     no new or changed tests needed.
+   - **Substantive** — logic/behavior change, touches multiple files, needs new/changed
+     tests, or you're unsure. **When in doubt, treat it as substantive** (the safe lane).
+
+   **Small-fix lane → `/sdd-fix`** (`ai/skills/apply_small_fix.md`):
+   1. Apply the small fix on the **same branch**, push (no new PR). No `/sdd-orchestrate`,
+      no Tester — it's a patch-in-place; `STATE` phase is unchanged.
+   2. **Re-run this review** on the updated diff.
+
+   **Substantive lane → back to the Developer (full verification):**
+   1. Record the send-back in `ai/STATE.md` (`reviewer → developer | <reason> | <spec>`) and
+      **rewind phase**: set `current_role: developer`, `current_phase: dev`.
+   2. Run **`/sdd-orchestrate`** — it resumes at Developer → Tester → Reviewer, so the change
+      is re-verified before it comes back. The Developer works on the **same branch** and pushes.
+   3. When it reaches DONE again, **re-run this review** on the updated diff.
+
+   **Both lanes:** the PR stays a **draft** (not mergeable) until an approval marks it ready.
+   **Loop cap: 2 auto-rounds** of request-changes on the same PR; a 3rd forces HITL — surface
+   the outstanding findings to the human and wait (mirrors the gate loop limit in
+   `ai/orchestration/hitl_policy.md`; prevents reviewer↔fix ping-pong from running away).
 
 ---
 
