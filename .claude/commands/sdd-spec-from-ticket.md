@@ -14,7 +14,7 @@ You are creating a spec seeded by a Linear ticket. This is the Linear-driven ent
 3. **Crystallize** into `ai/specs/<NNN>-<short-kebab-name>/spec.md` using `ai/specs/_template/spec.md`. Add a line at the very top of the spec: `Linear: <TICKET-ID> — <url>`. Map the ticket's acceptance criteria into the **Acceptance Criteria** checkboxes.
 4. **Run the Analyst self-check** from `write_spec_socratic.md`. Iterate once on any failed item.
 5. **Update `ai/STATE.md`**: set `current_spec`, `current_ticket: <TICKET-ID>`, `current_role: pm`, `current_phase: pm`; append a decision line ("Spec drafted from <TICKET-ID>; handoff to PM.").
-6. **Move the ticket to `Todo`** per `ai/skills/sync_ticket_status.md` (handoff to PM). Pre-authorized status sync — no extra confirmation.
+6. **Move the ticket to `Todo`** per `ai/skills/sync_ticket_status.md` (handoff to PM). Pre-authorized status sync — no extra confirmation. Also **post a short "spec drafted → PM" progress comment** per `ai/skills/log_ticket_progress.md` (auto).
 7. **Optionally** offer to post a one-line "spec drafted" comment back to the Linear ticket (writes to Linear — ask first).
 8. **Hand off** to the PM. In HITL mode, ask the human to confirm before invoking `ai/roles/pm.md`.
 

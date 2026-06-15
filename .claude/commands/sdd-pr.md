@@ -12,7 +12,7 @@ You are shipping the current spec as a pull request.
 4. Branch, ensure tests pass, push, and **confirm before opening the PR.**
 5. Open the PR (draft) with the ticket id in the title, linking the Linear ticket and the spec folder; request review.
 6. Update `ai/STATE.md` with the PR URL (`current_pr`).
-7. **Move the ticket to `In Review`** per `ai/skills/sync_ticket_status.md` (PR opened). When the PR later merges, it moves to `In Staging` (merge step / manual).
+7. **Move the ticket to `In Review`** per `ai/skills/sync_ticket_status.md` (PR opened), and **post a "PR opened → In Review" progress comment** per `ai/skills/log_ticket_progress.md` (auto). When the PR later merges, it moves to `In Staging` (merge step / manual).
 
 ## Hard rules
 

@@ -49,9 +49,12 @@ Read `ai/context/integrations.md` for the repo. GitHub access is via the `gh` CL
    top-level comment is prominent in the timeline and notifies watchers. Format:
    `🤖 Independent PR Review — ✅ Approved` (or `🔴 Changes requested`), a one-line verdict,
    the per-AC status, and any findings / required changes. Confirm before posting in HITL.
-7. **Record** a decision line in `ai/STATE.md`. The ticket stays `In Review` either way
+7. **Post a progress comment on the linked ticket** per `ai/skills/log_ticket_progress.md`
+   summarizing the verdict (`PR review: ✅ approved` / `🔴 changes requested`) — auto,
+   no-op if no ticket. This is on the Linear ticket, separate from the PR's GitHub comment.
+8. **Record** a decision line in `ai/STATE.md`. The ticket stays `In Review` either way
    (an approval just unlocks the merge gate; requested changes route back to the Developer).
-8. **On request-changes:** tell the human the fix should go back through `/sdd-orchestrate`
+9. **On request-changes:** tell the human the fix should go back through `/sdd-orchestrate`
    (Developer), then re-run `/sdd-pr-review` once the branch is updated.
 
 ---

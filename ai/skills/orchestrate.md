@@ -47,6 +47,7 @@ For each phase below, the orchestrator:
 6. **In autonomous mode:** logs the decision to `STATE.md` and proceeds, unless a send-back is required.
 7. **Updates** `STATE.md` and advances to the next phase (or routes the send-back).
 8. **Syncs the linked Linear ticket** to the phase's status per `ai/skills/sync_ticket_status.md` (no-op if `current_ticket` is `none`).
+9. **Posts a short progress comment** to the linked ticket per `ai/skills/log_ticket_progress.md` — auto, no confirmation; no-op if no ticket. One concise summary per gate (what the role did, gate result, what's next).
 
 Ticket status at each phase (see `ai/skills/sync_ticket_status.md` for the full mapping and rules):
 - **PM** → `Todo` (usually already set when the spec was handed off from the ticket)

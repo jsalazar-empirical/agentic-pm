@@ -45,6 +45,13 @@ There is **no "In Testing"** column yet — the Linear MCP can't create one, so 
 manually in Linear → Settings → Team → Workflow (between *In Progress* and *In Review*).
 Once it exists, the Tester/Reviewer rows pick it up automatically.
 
+**Progress log (traceability).** Alongside each status move, a short structured comment is
+auto-posted to the ticket summarizing what the role did, the gate result, and what's next
+(see `ai/skills/log_ticket_progress.md`). This builds a full audit trail in the ticket
+itself — spec → each role → PR → review → merge — without bloating the repo. These
+progress comments are **pre-authorized** (auto-posted, no confirmation); ad-hoc comments
+and issue create/edit still require confirmation.
+
 ---
 
 ## GitHub

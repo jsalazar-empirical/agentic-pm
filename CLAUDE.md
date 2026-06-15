@@ -37,6 +37,7 @@ the project `.mcp.json` (run `/mcp` once to authorize). GitHub uses the `gh` CLI
 ## Principles
 
 Clarity over cleverness. Small increments. Explicit gates and handoffs. Human-in-the-loop
-by default. **Never write Linear content (create/edit issues, post comments) or open/merge
-a PR without confirmation.** Automatic ticket **status** moves are pre-authorized as part of
-the flow (see `ai/skills/sync_ticket_status.md`).
+by default. **Never create/edit Linear issues, post ad-hoc comments, or open/merge a PR
+without confirmation.** Two things are pre-authorized as part of the flow: automatic ticket
+**status** moves (`ai/skills/sync_ticket_status.md`) and the structured **progress
+comments** posted at each transition (`ai/skills/log_ticket_progress.md`).
