@@ -80,8 +80,12 @@ Ticket status at each phase (see `ai/skills/sync_ticket_status.md` for the full 
 
 - Role file: `ai/roles/tester.md`
 - Goal: verify every acceptance criterion is met. Run/write tests as needed.
-- Output: test results + notes.
-- Gate check: all acceptance criteria pass. If not — **send-back** per the decision tree.
+- **Fan out into two parallel forks, then join** (`ai/skills/ui_testing.md`): Fork A —
+  API/unit (`npm test`) + non-UI criteria; Fork B — UI/E2E via the Preview MCP (live
+  functionality + computed-CSS styles + screenshots) and committed Playwright specs. Skip
+  Fork B if the spec has no UI surface.
+- Output: a joined `test-report.md` (both forks); UI evidence (screenshots, style assertions).
+- Gate check: all acceptance criteria pass **and both forks pass**. If not — **send-back** per the decision tree.
 
 ### Phase 5 — Reviewer
 
