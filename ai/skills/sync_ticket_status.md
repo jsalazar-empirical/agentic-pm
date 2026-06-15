@@ -42,8 +42,11 @@ skills below just call into it; don't duplicate the mapping elsewhere.
    advance moves the ticket forward. A **send-back** legitimately regresses the phase
    (e.g. Tester → Developer), so moving back to **In Progress** is correct in that case.
    Don't otherwise move a ticket backward.
-5. **Log nothing extra in Linear.** The status change is the signal; no comment needed.
-   (Posting a comment is a separate, confirmation-required action.)
+5. **The status move itself needs no commentary** — the column change is the signal. A
+   short structured **progress comment** IS posted at this same transition, separately, per
+   `ai/skills/log_ticket_progress.md` (the audit trail) — that's also pre-authorized. What
+   still requires confirmation is *ad-hoc* Linear content (issue create/edit, freeform
+   comments), not these two.
 
 ---
 
