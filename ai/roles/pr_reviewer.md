@@ -86,9 +86,13 @@ if code must change.
 
 ## Authorization
 
-Posting a PR review publishes to GitHub. In **HITL** mode, show the drafted review and
-confirm before posting. In **autonomous** mode, post it and log the decision. Running
-`/sdd-pr-review` is the human's go-ahead to perform the review.
+Posting a PR review (approve or request-changes) + its comments is **pre-authorized** —
+post automatically, **no confirmation**, in both HITL and autonomous mode. Running
+`/sdd-pr-review` is the go-ahead. On request-changes you also **auto-loop the developer
+fix** (own fork) on the same branch and re-review, up to **2 rounds** before forcing HITL
+(see `ai/skills/review_pull_request.md`). What stays human-gated is the **merge** itself,
+not the review. (Posting review content is low-stakes/reversible, like the progress
+comments; merging `main` is the consequential action.)
 
 ---
 

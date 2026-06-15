@@ -11,10 +11,11 @@ actual opened PR against `main` and approve or request changes. You do **not** m
 2. **Read** `ai/context/integrations.md` for the repo. **Read** `ai/STATE.md` for `current_pr` and `current_spec`. If `$ARGUMENTS` names a PR (number/URL), review that one; else use `current_pr`. If there's no PR, stop and tell the human to run `/sdd-pr` first.
 3. Load the **real diff** (`gh pr diff`), CI status (`gh pr checks`), and the spec's acceptance criteria. Review independently — don't rubber-stamp the internal sign-off. For a large diff, prefer a sub-agent (own fork).
 4. Decide approve vs. request-changes against the PR Reviewer gate. Draft a short, specific review body.
-5. **Post the review.** Approvals go in as the **review-bot identity** (`GH_TOKEN=$PR_REVIEWER_GH_TOKEN`) since GitHub blocks self-approval — then `gh pr ready`. Request-changes via `gh pr review --request-changes`. If the bot token isn't set, fall back to a comment-review and warn. In HITL, show the draft and confirm before posting; in autonomous, post directly. See "Review identity" in `ai/context/integrations.md`.
-6. **Post a visibility comment** (`gh pr comment`) summarizing the verdict — always, approved or not — so it's prominent and notifies watchers.
-7. **Post a progress comment on the linked ticket** per `ai/skills/log_ticket_progress.md` summarizing the verdict (`PR review: ✅ approved` / `🔴 changes requested`) — auto, no-op if no ticket. (This is on the Linear ticket; separate from the PR's GitHub comment.)
-8. Update `ai/STATE.md` with a decision line. On request-changes, route the fix back through `/sdd-orchestrate` (Developer), then re-run `/sdd-pr-review`.
+5. **Post the review — auto, no confirmation** (both HITL and autonomous). Approvals go in as the **review-bot identity** (`GH_TOKEN=$PR_REVIEWER_GH_TOKEN`) since GitHub blocks self-approval — then `gh pr ready`. Request-changes via `gh pr review --request-changes` (PR stays draft). If the bot token isn't set, fall back to a comment-review and warn. See "Review identity" in `ai/context/integrations.md`.
+6. **Post a visibility comment** (`gh pr comment`) summarizing the verdict — always, approved or not (auto).
+7. **Post a progress comment on the linked ticket** per `ai/skills/log_ticket_progress.md` (`PR review: ✅ approved` / `🔴 changes requested`) — auto, no-op if no ticket.
+8. Update `ai/STATE.md` with a decision line.
+9. **On request-changes, auto-loop the fix** (per `ai/skills/review_pull_request.md`): record the send-back, spawn the Developer to fix on the same branch + push, then re-run the review — up to **2 rounds**, then force HITL. The merge itself stays the human's call (`/sdd-merge`).
 
 ## Hard rules
 
