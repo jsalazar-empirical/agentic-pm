@@ -11,7 +11,10 @@ The board-drain loop (`ai/skills/board_drain_loop.md`, `/sdd-loop`) runs at L2.
 
 ## How to set the mode
 
-Mode is set in `ai/STATE.md` under `mode:`. It can be flipped at any time.
+Mode is set in `ai/STATE.md` under `mode:` (`hitl` or `autonomous`). It can be flipped at
+any time. The autonomy **levels** in `escalation_policy.md` map onto these two values:
+L0 = `hitl`; L1 and the L2 `/sdd-loop` both run under `autonomous` (the level says how far
+the run goes, not a new field value).
 
 To start an autonomous run, the human says one of:
 - *"orchestrate this autonomously"*

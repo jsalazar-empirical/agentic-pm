@@ -12,12 +12,14 @@ resolves blockers and crucial decisions**, not someone who approves every step.
 
 ## Autonomy levels
 
-Set per run in `ai/STATE.md` (`mode:`) or by the human's instruction:
+These map onto the existing two-valued `mode:` in `ai/STATE.md` (no schema change) — the
+level just says *how far* an autonomous run goes:
 
-- **L0 — HITL (default):** pause at every gate. (Today's `hitl` mode.)
-- **L1 — Assisted:** run autonomously, pause only at **Always-escalate** items below.
-- **L2 — Autonomous loop:** L1 + drive multiple tickets unattended (see
-  `ai/skills/board_drain_loop.md`). Still pauses at Always-escalate items.
+- **L0 — HITL (default):** `mode: hitl` — pause at every gate.
+- **L1 — Assisted:** `mode: autonomous` — run autonomously, pause only at **Always-escalate**
+  items below.
+- **L2 — Autonomous loop:** `mode: autonomous` + `/sdd-loop` — L1 across multiple tickets,
+  unattended (see `ai/skills/board_drain_loop.md`). Still pauses at Always-escalate items.
 
 L1/L2 are the "human as orchestrator" modes. Even at L2, the escalations below are hard stops.
 
