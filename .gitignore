@@ -4,6 +4,7 @@ build/
 playwright-report/
 test-results/
 /playwright/.cache/
+tests/e2e/.tmp-templates/
 .env
 .DS_Store
 __pycache__/
