@@ -1,6 +1,7 @@
 const templateSelect = document.getElementById("template");
 const transcriptInput = document.getElementById("transcript");
 const notesInput = document.getElementById("notes");
+const requirementsInput = document.getElementById("requirements");
 const generateBtn = document.getElementById("generate");
 const statusEl = document.getElementById("status");
 const resultSection = document.getElementById("result");
@@ -201,6 +202,7 @@ async function generate() {
   const templateId = templateSelect.value;
   const transcript = transcriptInput.value.trim();
   const notes = notesInput.value.trim();
+  const requirements = requirementsInput.value.trim();
 
   if (!transcript) {
     setStatus("Please paste an interview transcript first.", true);
@@ -214,7 +216,7 @@ async function generate() {
     const res = await fetch("/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ templateId, transcript, notes }),
+      body: JSON.stringify({ templateId, transcript, notes, requirements }),
     });
     const data = await res.json();
 
