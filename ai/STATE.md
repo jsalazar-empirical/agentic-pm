@@ -7,14 +7,19 @@ Single source of truth for "where are we right now." Keep this file small (~50 l
 ## Header
 
 ```
-current_spec:    001-core-feedback-generation
-current_ticket:  EMP-68
+current_spec:    002-e2e-tests-and-ci
+current_ticket:  EMP-81
 current_role:    reviewer
 current_phase:   done
-mode:            hitl
-current_pr:      https://github.com/jsalazar-empirical/agentic-pm/pull/2
-started_at:      2026-06-10
+mode:            autonomous
+current_pr:      none
+started_at:      2026-06-16
 ```
+
+> Autonomy: **L2** board-drain loop (`/sdd-loop`). Run guardrails: drain EMP-81 → EMP-82 →
+> EMP-83; **loop-merge pre-authorized** this run (approved + CI-green PRs may merge). All
+> other Always-escalate items still hard-stop (ambiguity, repeated failure, security, spec
+> conflict). One ticket at a time; park-and-continue on escalation.
 
 ---
 
@@ -22,14 +27,11 @@ started_at:      2026-06-10
 
 Format: `YYYY-MM-DD | role | decision`
 
-- 2026-06-10 | analyst | Spec 001 drafted from EMP-68; handoff to PM.
-- 2026-06-10 | pm | Consolidated AC to 6 observable items; PM gate passed; ready for Architect.
-- 2026-06-10 | architect | architecture.md + tasks.md written (raw Node http, /api/generate, templates-as-files); Architect gate passed.
-- 2026-06-10 | developer | Implemented server/generate/templates + vanilla UI + 16 tests (all pass); Developer gate passed. AC3/AC6 need live verification with a real API key.
-- 2026-06-10 | tester | Offline 16/16 + live generation PASS (~21s, ~$0.02-0.05/gen, template-conformant); all 6 ACs PASS; Tester gate passed.
-- 2026-06-10 | reviewer | Reviewer gate passed; all 6 ACs confirmed; 1 INFO finding (non-exploitable path-prefix); spec 001 DONE. Ready for /sdd-pr.
-- 2026-06-11 | shipping | Seeded empty repo (baseline->main); pushed EMP-68 app branch; opened draft PR #1.
-- 2026-06-11 | shipping | Renamed branch to feature/EMP-68-core-feedback-generation (new convention); PR #1 auto-closed, reopened as PR #2.
+- 2026-06-16 | loop | /sdd-loop L2 started; guardrails = drain EMP-81/82/83, loop-merge pre-authorized.
+- 2026-06-16 | architect | architecture.md + tasks.md (Playwright webServer + page.route mock; GH Actions PR CI); Architect gate passed.
+- 2026-06-16 | developer | Implemented playwright.config + critical-path.spec + ci.yml + lockfile (audit-clean); Dev gate passed.
+- 2026-06-16 | tester | Fork A 16/16 + Fork B 2/2 E2E (mocked generate, computed-CSS styles); all 5 ACs PASS; Tester gate passed.
+- 2026-06-16 | reviewer | Reviewer gate passed; 1 INFO (form-data advisory, patched); spec 002 DONE. Ready for /sdd-pr.
 
 ---
 

@@ -6,9 +6,13 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node --test"
+    "test": "node --test",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.40.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
   }
 }
