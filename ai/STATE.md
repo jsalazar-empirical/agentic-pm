@@ -7,8 +7,8 @@ Single source of truth for "where are we right now." Keep this file small (~50 l
 ## Header
 
 ```
-current_spec:    002-e2e-tests-and-ci
-current_ticket:  EMP-81
+current_spec:    003-template-management
+current_ticket:  EMP-82
 current_role:    reviewer
 current_phase:   done
 mode:            autonomous
@@ -27,11 +27,11 @@ started_at:      2026-06-16
 
 Format: `YYYY-MM-DD | role | decision`
 
-- 2026-06-16 | loop | /sdd-loop L2 started; guardrails = drain EMP-81/82/83, loop-merge pre-authorized.
-- 2026-06-16 | architect | architecture.md + tasks.md (Playwright webServer + page.route mock; GH Actions PR CI); Architect gate passed.
-- 2026-06-16 | developer | Implemented playwright.config + critical-path.spec + ci.yml + lockfile (audit-clean); Dev gate passed.
-- 2026-06-16 | tester | Fork A 16/16 + Fork B 2/2 E2E (mocked generate, computed-CSS styles); all 5 ACs PASS; Tester gate passed.
-- 2026-06-16 | reviewer | Reviewer gate passed; 1 INFO (form-data advisory, patched); spec 002 DONE. Ready for /sdd-pr.
+- 2026-06-16 | shipping | EMP-81: PR #8 squash-merged → main (1fc93d1); EMP-81 → In Staging.
+- 2026-06-16 | orchestrator | EMP-82: escalated storage decision → human chose Files + Railway volume (TEMPLATES_DIR).
+- 2026-06-16 | analyst | Spec 003 drafted from EMP-82 (template CRUD over TEMPLATES_DIR; default protected).
+- 2026-06-16 | developer | EMP-82: templates.js CRUD + 4 routes + manage UI; Dev gate passed.
+- 2026-06-16 | tester/reviewer | EMP-82: 31 unit + 7 E2E green; all 6 ACs PASS; spec 003 DONE. Ready for /sdd-pr.
 
 ---
 

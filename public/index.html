@@ -45,6 +45,40 @@
         <p id="status" class="status" role="status" aria-live="polite"></p>
       </section>
 
+      <section class="card" id="manage">
+        <div class="card__head">
+          <h2 class="card__title">Manage templates</h2>
+          <button id="tpl-new" class="btn btn--ghost" type="button">New template</button>
+        </div>
+        <ul id="tpl-list" class="tpl-list"></ul>
+
+        <div id="tpl-editor" class="tpl-editor" hidden>
+          <h3 id="tpl-editor-title" class="tpl-editor__title">New template</h3>
+          <div class="field">
+            <label for="tpl-name">Name</label>
+            <input id="tpl-name" type="text" placeholder="e.g. Backend Engineer Interview" />
+          </div>
+          <div class="field">
+            <label for="tpl-body">Markdown body</label>
+            <textarea
+              id="tpl-body"
+              rows="12"
+              placeholder="Paste or write the template markdown…"
+            ></textarea>
+          </div>
+          <div class="tpl-editor__actions">
+            <label class="btn btn--ghost tpl-upload">
+              Upload .md
+              <input id="tpl-file" type="file" accept=".md,text/markdown" hidden />
+            </label>
+            <span class="tpl-spacer"></span>
+            <button id="tpl-cancel" class="btn btn--ghost" type="button">Cancel</button>
+            <button id="tpl-save" class="btn btn--primary" type="button">Save template</button>
+          </div>
+          <p id="tpl-status" class="status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
       <section id="result" class="card result" hidden>
         <div class="result__bar">
           <h2>Feedback</h2>
