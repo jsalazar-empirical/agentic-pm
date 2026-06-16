@@ -61,7 +61,7 @@ async function handleGenerate(req, res) {
     return sendJson(res, 400, { error: "Invalid JSON request body." });
   }
 
-  const { templateId, transcript, notes } = body ?? {};
+  const { templateId, transcript, notes, requirements } = body ?? {};
 
   if (!templateId || typeof templateId !== "string") {
     return sendJson(res, 400, { error: "Missing or invalid 'templateId'." });
@@ -76,7 +76,8 @@ async function handleGenerate(req, res) {
   }
 
   try {
-    const feedback = await callClaude(template, transcript, notes);
+    // `requirements` is optional — when absent, generation behaves exactly as before.
+    const feedback = await callClaude(template, transcript, notes, requirements);
     return sendJson(res, 200, { feedback });
   } catch (err) {
     const message = err?.message || "Feedback generation failed.";

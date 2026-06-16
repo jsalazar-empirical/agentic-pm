@@ -7,8 +7,8 @@ Single source of truth for "where are we right now." Keep this file small (~50 l
 ## Header
 
 ```
-current_spec:    003-template-management
-current_ticket:  EMP-82
+current_spec:    004-decision-recommendation
+current_ticket:  EMP-83
 current_role:    reviewer
 current_phase:   done
 mode:            autonomous
@@ -30,8 +30,10 @@ Format: `YYYY-MM-DD | role | decision`
 - 2026-06-16 | shipping | EMP-81: PR #8 squash-merged → main (1fc93d1); EMP-81 → In Staging.
 - 2026-06-16 | orchestrator | EMP-82: escalated storage decision → human chose Files + Railway volume (TEMPLATES_DIR).
 - 2026-06-16 | analyst | Spec 003 drafted from EMP-82 (template CRUD over TEMPLATES_DIR; default protected).
-- 2026-06-16 | developer | EMP-82: templates.js CRUD + 4 routes + manage UI; Dev gate passed.
-- 2026-06-16 | tester/reviewer | EMP-82: 31 unit + 7 E2E green; all 6 ACs PASS; spec 003 DONE. Ready for /sdd-pr.
+- 2026-06-16 | tester/reviewer | EMP-82: 31 unit + 7 E2E green; all 6 ACs PASS; spec 003 DONE.
+- 2026-06-16 | shipping | EMP-82: PR #9 approved by bot + squash-merged → main (958a969); EMP-82 → In Staging.
+- 2026-06-16 | analyst | Spec 004 drafted from EMP-83 (optional role-requirements → grounded Pass/Pool/No-Hire).
+- 2026-06-16 | dev/test/review | EMP-83: requirements plumbed UI→server→prompt; 35 unit + 9 E2E green; AC4 byte-equal; spec 004 DONE.
 
 ---
 
