@@ -34,6 +34,7 @@ Format: `YYYY-MM-DD | role | decision`
 - 2026-06-16 | shipping | EMP-82: PR #9 approved by bot + squash-merged → main (958a969); EMP-82 → In Staging.
 - 2026-06-16 | analyst | Spec 004 drafted from EMP-83 (optional role-requirements → grounded Pass/Pool/No-Hire).
 - 2026-06-16 | dev/test/review | EMP-83: requirements plumbed UI→server→prompt; 35 unit + 9 E2E green; AC4 byte-equal; spec 004 DONE.
+- 2026-06-16 | shipping | EMP-83: PR #10 approved by bot + squash-merged → main (4f3bc3b); EMP-83 → In Staging. Board drained — /sdd-loop complete.
 
 ---
 
